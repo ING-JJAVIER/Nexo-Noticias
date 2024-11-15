@@ -1,32 +1,34 @@
-import Image from 'next/image'
 import React from 'react'
-import DropDownBtn from './dropDownBtn'
+import SelectCountry from './selectCountry'
+import SelectLanguage from './SelectLanguage'
+import SelectCategories from './selectCategories'
+import SearchButton from './searchButton'
 
-export default function ModalSearch() {
+export default function ModalSearch({ closeModal  }) {
+    
+
     return (
-        <div className='bg-indigo-500'>
-            <div className='flex justify-center items-center gap-2 w-[30%] h-full'>
+        <div className='bg-indigo-500 relative'>
+            <div className='gap-2 w-full h-full md:flex md:justify-center lg:flex lg:justify-center pb-2 '>
+                <div className='flex justify-end w-11/12 absolute pt-1'>
+                    <button className='flex items-center text-3xl hover:bg-red-600 h-6 hover:rounded-lg active:text-4xl pb-1' type="button"
+                    onClick={closeModal}
+                    aria-label='Cerrar'
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div className='flex pt-3'>
+                    <SelectLanguage />
+                    <SelectCategories />
+                </div>
 
-                <DropDownBtn />
-                <button type="button">
-                    <figure>
-                        <Image className='w-full h-full' src='/icons/langIcon.svg' alt='language icon' width={30} height={30} />
-                    </figure>
-                </button>
-
-                <button type="button">
-                    <figure>
-                        <Image className='w-full h-full' src='/icons/country.svg' alt='country icon' width={30} height={30} />
-                    </figure>
-                </button>
-
-                <button type="button">
-                    <figure>
-                        <Image className='w-full h-full' src='/icons/newslester.svg' alt='newslester icon' width={30} height={30} />
-                    </figure>
-                </button>
-
+                <div className='flex items-center gap-2 pt-3'>
+                    <SelectCountry />
+                    <SearchButton closeModal={closeModal}/>
+                </div>
             </div>
+
         </div>
     )
 }
