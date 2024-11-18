@@ -25,6 +25,10 @@ export default function Carousel() {
     };
 
     useEffect(() => {
+        topNews();
+    }, []);
+
+    useEffect(() => {
         if (articles.length > 0) {
             const id = setInterval(() => {
                 setCarousel((prevIndex) => (prevIndex + 1) % articles.length);
