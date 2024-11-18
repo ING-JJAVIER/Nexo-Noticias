@@ -8,7 +8,7 @@ export default function SelectLanguage() {
     const menuRef = useRef(null);
 
     const languages = [
-        { key: 'ingles', label: 'Ingles' },//qui va la logica del consumo del API
+        { key: 'ingles', label: 'Ingles' },
         { key: 'Español', label: 'Español' },
         { key: 'Portugues', label: 'Portugues' },
         { key: 'Aleman', label: 'Aleman' },

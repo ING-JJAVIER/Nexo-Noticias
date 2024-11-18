@@ -23,10 +23,7 @@ export const faqs = [
         question: "¿Cómo puedo buscar noticias antiguas o específicas?",
         answer: "En la esquina superior derecha de la página principal, encontrarás una barra de búsqueda. Ingresa palabras clave o el tema que deseas buscar, y verás los artículos relacionados."
     },
-    {
-        question: "¿Puedo personalizar el contenido que veo en la página?",
-        answer: "Sí, al registrarte y crear una cuenta, puedes seleccionar tus temas de interés y recibir recomendaciones personalizadas en la página de inicio."
-    },
+
     {
         question: "¿Cómo puedo compartir los artículos en redes sociales?",
         answer: "Cada artículo tiene iconos de redes sociales (Facebook, Twitter, LinkedIn, etc.) al final del texto. Haz clic en el icono de la red social en la que deseas compartir el artículo, y se abrirá una ventana para publicarlo."
@@ -40,8 +37,8 @@ export const faqs = [
         answer: "¡Claro! Nos encanta recibir comentarios de nuestros lectores. Puedes enviarnos tus sugerencias o comentarios a través de la sección “Contáctanos” o enviarnos un correo a nuestro equipo de soporte."
     },
     {
-        question: "¿Tienen una sección de comentarios en los artículos?",
-        answer: "Sí, al final de cada artículo encontrarás una sección de comentarios donde puedes compartir tus opiniones y ver lo que otros lectores piensan. Es necesario estar registrado para comentar y participar en la comunidad."
+        question: "¿Los artículos tienen derechos de autor?",
+        answer: "Sí, al final o al inicio de cada artículo encontrarás nombre del autor asi como la fuente de extraccion de dicho articulo."
     },
     {
         question: "¿Cómo puedo contactar al servicio de atención al cliente?",
@@ -49,6 +46,6 @@ export const faqs = [
     },
     {
         question: "¿Se requiere registrarse para leer los artículos?",
-        answer: "La mayoría de nuestros artículos son gratuitos y accesibles para todos, pero algunos reportajes especiales y artículos exclusivos requieren una cuenta registrada para su visualización."
+        answer: "No, todos nuestros artículos son gratuitos y accesibles para todos."
     },
 ];

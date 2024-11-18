@@ -15,7 +15,8 @@ export default function SearchModal({ openModal, hideSearch }) {
                         src='/icons/searchIcon.svg'
                         alt='search icon'
                         width={30}
-                        height={30} />
+                        height={30}
+                        as='image' />
                 </figure>
 
                 <input

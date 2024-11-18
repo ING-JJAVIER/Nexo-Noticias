@@ -12,7 +12,7 @@ export default function SubModal({closeSubModal}) {
                     Nos pondremos en contacto a la brevedad posible.
                 </p>
                 <figure className="mt-4 flex justify-center items-center">
-                    <Image className='text-green-500' src="/icons/check.svg" alt="check icon" width={40} height={40} />
+                    <Image className='text-green-500' src="/icons/check.svg" alt="check icon" width={40} height={40} as='image' />
                 </figure>
                 <button
                     type="button"

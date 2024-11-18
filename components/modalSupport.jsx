@@ -11,28 +11,29 @@ export default function ModalSupport() {
     const openModalSupport = () => setModalSupport(true);
     const closeModalSupport = () => setModalSupport(false);
     const openSubModal = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setModalSupport(false);
         setSubModal(true);
     };
     const closeSubModal = () => {
-        setSubModal(false); 
+        setSubModal(false);
     };
 
     return (
-        <div className=''>
+        <div>
             <button
-                className="flex justify-center items-center h-12 w-12 rounded-full bg-indigo-800 fixed right-4 bottom-4"
+                className="flex justify-center items-center h-12 w-12 rounded-full bg-indigo-800 fixed right-4 bottom-16"
                 type="button"
                 onClick={openModalSupport}>
                 <figure>
-                    <Image className='w-9' src='/icons/support.svg' alt='support icon' width={30} height={30} />
+                    <Image className='w-9' src='/icons/support.svg' alt='support icon' width={30} height={30} as='image' />
                 </figure>
             </button>
 
             {
                 modalSupport &&
-                <div id="crud-modal" tabIndex="-1" aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div id="crud-modal" tabIndex="-1" className="overflow-y-auto overflow-x-hidden fixed right-4 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
                     <div className="p-4 w-full max-w-md max-h-full">
 
                         <div className=" bg-white rounded-lg shadow dark:bg-gray-700">
@@ -78,15 +79,15 @@ export default function ModalSupport() {
                                         <textarea
                                             id="description"
                                             rows="4"
-                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required ></textarea>
+                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none" required  ></textarea>
                                     </div>
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     onClick={openSubModal}
-                                    >
+                                >
                                     Enviar
                                 </button>
                             </form>
@@ -95,12 +96,12 @@ export default function ModalSupport() {
                 </div>
             }
 
-{
-subModal && (
-    <SubModal closeSubModal={closeSubModal} />
-   
-)
-}
+            {
+                subModal && (
+                    <SubModal closeSubModal={closeSubModal} />
+
+                )
+            }
 
         </div>
     )
