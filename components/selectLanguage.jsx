@@ -2,17 +2,21 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function SelectLanguage() {
+export default function SelectLanguage({onChange }) {
     const [isOpen, setIsOpen] = useState(false);
     const [language, setLanguage] = useState('');
     const menuRef = useRef(null);
 
     const languages = [
-        { key: 'ingles', label: 'Ingles' },
-        { key: 'Español', label: 'Español' },
-        { key: 'Portugues', label: 'Portugues' },
-        { key: 'Aleman', label: 'Aleman' },
-        { key: 'Frances', label: 'Frances' },
+        { key: 'en', label: 'Ingles' },
+        { key: 'es', label: 'Español' },
+        { key: 'pt', label: 'Portugues' },
+        { key: 'ru', label: 'Ruso' },
+        { key: 'fr', label: 'Frances' },
+        { key: 'sv', label: 'Sueco' },
+        { key: 'no', label: 'Noruego' },
+        { key: 'it', label: 'italiano' },
+        { key: 'nl', label: 'Neerlndés' },
     ];
 
     const toggleMenu = () => {
@@ -22,6 +26,7 @@ export default function SelectLanguage() {
     const handleSelect = (language) => {
         setLanguage(language.label);
         setIsOpen(false);
+        if (onChange ) onChange (language.key);
     };
 
     const handleClickOutside = (event) => {
@@ -66,22 +71,24 @@ export default function SelectLanguage() {
                 </label>
             </div>
 
-            {isOpen && (
-                <div ref={menuRef} className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-8/12 mt-1">
-                    <ul className="py-2 text-sm text-gray-700">
-                        {languages.map(language => (
-                            <li key={language.key}>
-                                <button
-                                    onClick={() => handleSelect(language)}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                >
-                                    {language.label}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            {
+                isOpen && (
+                    <div ref={menuRef} className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-8/12 mt-1" aria-required>
+                        <ul className="py-2 text-sm text-gray-700">
+                            {languages.map(language => (
+                                <li key={language.key}>
+                                    <button
+                                        onClick={() => handleSelect(language)}
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    >
+                                        {language.label}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
         </div>
     );
 }

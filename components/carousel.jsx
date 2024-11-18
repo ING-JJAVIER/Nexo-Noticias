@@ -27,7 +27,7 @@ export default function Carousel() {
     const startInterval = () => {
         const id = setInterval(() => {
             setCarousel((prevIndex) => (prevIndex + 1) % articles.length);
-        }, 5000);
+        }, 6000);
         setInt(id);
     };
 
@@ -60,8 +60,8 @@ export default function Carousel() {
                         {
                             articles.map((article, index) => (
                                 <div key={index} className="min-w-full relative flex flex-col items-center">
-                                    <img src={article.urlToImage} alt={article.title} className="w-full h-auto" width={100} height={100} />
-                                    <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center p-4">
+                                    <img src={article.urlToImage} alt={article.title} className="w-full h-auto object-cover" width={100} height={100} />
+                                    <div className="absolute bottom-0 w-full bg-black bg-opacity-65 text-white text-center p-4">
                                         <h2 className="font-semibold text-lg">{article.title}</h2>
                                     </div>
                                 </div>

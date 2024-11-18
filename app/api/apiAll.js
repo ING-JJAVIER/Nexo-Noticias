@@ -17,7 +17,8 @@ export async function apiAll(page = 1, pageSize = 10, params = {}) {
       apiKey, 
       page, 
       pageSize,
-      q: params.q || "world"
+      q: params.q || "world",
+      language: params.language || 'es'
     }).toString();
 
    const response = await fetch(`${baseUrl}?${queryParams}`); 

@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SelectCountry from './selectCountry'
 import SelectLanguage from './SelectLanguage'
 import SelectCategories from './selectCategories'
 import SearchButton from './searchButton'
 
 export default function ModalSearch({ closeModal  }) {
+    const [language, setLanguage] = useState('');
     
-
+    const langChange = (newLanguage) => {
+        setLanguage(newLanguage);
+    };
+    
     return (
         <div className='bg-indigo-500 relative'>
             <div className='gap-2 w-full h-full md:flex md:justify-center lg:flex lg:justify-center pb-2 '>
@@ -19,13 +23,13 @@ export default function ModalSearch({ closeModal  }) {
                     </button>
                 </div>
                 <div className='flex pt-3'>
-                    <SelectLanguage />
+                    <SelectLanguage onChange ={langChange} />
                     <SelectCategories />
                 </div>
 
                 <div className='flex items-center gap-2 pt-3'>
                     <SelectCountry />
-                    <SearchButton closeModal={closeModal}/>
+                    <SearchButton closeModal={closeModal} language={language}/>
                 </div>
             </div>
 
