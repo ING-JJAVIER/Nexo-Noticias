@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Header from '@/components/header'
-import ModalSearch from '@/components/modalSearch'
+import ModalSearch from '@/components/ModalSearch'
 import Carousel from '@/components/carousel'
 import MainCardNews from '@/components/mainCardNews'
 import MainCardVideo from '@/components/mainCardVideo'
