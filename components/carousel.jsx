@@ -24,21 +24,26 @@ export default function Carousel() {
         }
     };
 
-    const startInterval = () => {
-        const id = setInterval(() => {
-            setCarousel((prevIndex) => (prevIndex + 1) % articles.length);
-        }, 6000);
-        setInt(id);
-    };
-
     useEffect(() => {
-        topNews();
-    }, []);
-
+        if (articles.length > 0) {
+            const id = setInterval(() => {
+                setCarousel((prevIndex) => (prevIndex + 1) % articles.length);
+            }, 5000);
+            setInt(id);
+    
+            
+            return () => clearInterval(id);
+        }
+    }, [articles]);  
+    
     useEffect(() => {
-        if (articles.length > 0) startInterval();
-        return () => clearInterval(int);
-    }, [articles]);
+        return () => {
+            if (int) {
+                clearInterval(int);
+            }
+        };
+    }, [int]); 
+    
 
     const nextSlide = () => {
         setCarousel((prevIndex) => (prevIndex + 1) % articles.length);
