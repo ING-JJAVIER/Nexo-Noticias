@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function SelectLanguage({onChange }) {
+export default function SelectLanguage({ onChange }) {
     const [isOpen, setIsOpen] = useState(false);
     const [language, setLanguage] = useState('');
     const menuRef = useRef(null);
@@ -26,7 +26,7 @@ export default function SelectLanguage({onChange }) {
     const handleSelect = (language) => {
         setLanguage(language.label);
         setIsOpen(false);
-        if (onChange ) onChange (language.key);
+        if (onChange) onChange(language.key);
     };
 
     const handleClickOutside = (event) => {

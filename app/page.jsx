@@ -4,7 +4,7 @@ import Header from '@/components/header'
 import ModalSearch from '@/components/ModalSearch'
 import Carousel from '@/components/carousel'
 import MainCardNews from '@/components/mainCardNews'
-import MainCardVideo from '@/components/mainCardVideo'
+import MainCardArticles from '@/components/mainCardArticles'
 import ModalSupport from '@/components/modalSupport'
 import Footer from '@/components/footer'
 
@@ -24,7 +24,7 @@ export default function Home() {
       }
       <Carousel />
       <MainCardNews />
-      <MainCardVideo />
+      <MainCardArticles />
       <ModalSupport />
       <Footer />
     </div>

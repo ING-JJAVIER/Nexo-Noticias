@@ -8,24 +8,26 @@ import { apiKey } from '../apiKey/apiKey';
  * @returns {Array} Lista de artículos obtenidos desde la API.
  */
 
-export async function apiAll(page = 1, pageSize = 10, params = {}) {
+export async function apiCar(page = 1, pageSize = 10, params = {}) {
   try {
-    const baseUrl = 'https://newsapi.org/v2/everything'; 
+    const baseUrl = `https://newsapi.org/v2/everything`; 
 
     const queryParams = new URLSearchParams({
-      ...params, 
+      ...params,
       apiKey, 
       page, 
       pageSize,
-      q: params.q || "world",
+      q: params.q || "general",
       language: params.language || 'es'
     }).toString();
 
-   const response = await fetch(`${baseUrl}?${queryParams}`); 
-    const news = await response.json();
-    console.log(news)
-    
-    return news.articles;
+    const response = await fetch(`${baseUrl}?${queryParams}`);
+    const data = await response.json();
+    if (data.status === 'ok' && data.articles) {
+      return data.articles;
+    } else {
+      return [];
+    }
 
   } catch (error) {
     console.error(error.message);

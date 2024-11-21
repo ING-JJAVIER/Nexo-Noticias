@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { apiAll } from '@/app/api/apiAll';
+import { apiCar } from '@/app/api/apiCar';
 import { Spinner } from "@nextui-org/react";
 
-export default function Carousel() {
+export default function Carousel({language}) {
     const [carousel, setCarousel] = useState(0);
     const [int, setInt] = useState(null);
     const [articles, setArticles] = useState([]);
@@ -12,7 +12,7 @@ export default function Carousel() {
     const topNews = async () => {
         try {
             setLoading(true);
-            const allArticles = await apiAll();
+            const allArticles = await apiCar();
             const topArticles = allArticles
                 .filter((article) => article.urlToImage && article.title)
                 .slice(0, 10);
@@ -26,7 +26,7 @@ export default function Carousel() {
 
     useEffect(() => {
         topNews();
-    }, []);
+    }, [language]);
 
     useEffect(() => {
         if (articles.length > 0) {

@@ -1,25 +1,41 @@
-import Image from 'next/image'
-import React from 'react'
-import { apiAll } from '@/app/api/apiAll'
-
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { apiCont } from '@/app/api/apiCont';
 
 export default function SearchButton({ closeModal, language }) {
-  
-    const handleSearch = async () => {
-        try {
-            const news = await apiAll(1, 10, { language });
-        } catch (error) {
-            console.error("Error al buscar noticias:", error);
-        }
-        closeModal();
-    };
+  const [loading, setLoading] = useState(false);
 
-    return (
-        <button className='flex justify-center items-center border border-indigo-700 rounded-full w-28 h-8 bg-slate-700 text-white mt-4 ml-1 hover:bg-slate-600 active:text-[1.2rem]' type="button" onClick={handleSearch}>
-            <figure className='mr-2'>
-                <Image className='w-full h-full' src='/icons/searchIcon.svg' alt='search icon' width={30} height={30} />
-            </figure>
-            Buscar
-        </button>
-    )
+  const handleSearch = async () => {
+    if (!language) {
+      console.error('No se ha seleccionado un idioma');
+      return; 
+    }
+
+    try {
+      setLoading(true); 
+      const news = await apiCont(1, 10, { language });
+     
+    } catch (error) {
+      console.error("Error al buscar noticias:", error);
+    } finally {
+      setLoading(false); 
+      closeModal(); 
+    }
+  };
+
+  return (
+    <button
+      className={`flex justify-center items-center border border-indigo-700 rounded-full w-28 h-8 mt-4 ml-1 ${
+        loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-slate-700 hover:bg-slate-600 active:text-[1.2rem]'
+      } text-white`}
+      type="button"
+      onClick={handleSearch}
+      disabled={loading} 
+    >
+      <figure className="mr-2">
+        <Image className="w-full h-full" src="/icons/searchIcon.svg" alt="search icon" width={30} height={30} />
+      </figure>
+      {loading ? 'Buscando...' : 'Buscar'}
+    </button>
+  );
 }
