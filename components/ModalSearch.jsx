@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import SelectCountry from './selectCountry'
-import SelectLanguage from './SelectLanguage'
-import SelectCategories from './selectCategories'
-import SearchButton from './searchButton'
+import SelectCountry from '@/components/selectCountry'
+import SelectLanguage from '@/components/selectLanguage'
+import SelectCategories from '@/components/selectCategories'
+import SearchButton from '@/components/searchButton'
 import Image from 'next/image'
 
 export default function ModalSearch({ closeModal }) {
