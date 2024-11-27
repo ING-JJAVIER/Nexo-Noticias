@@ -4,10 +4,10 @@ import { apiCont } from '@/app/api/apiCont';
 import { apiCar } from '@/app/api/apiCar';
 import { Spinner } from '@nextui-org/react';
 
-export default function MainCardNews({ language }) {
+export default function MainCardNews({ language, searchQuery }) {
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [rs, setRs] = useState([]); // Asegúrate de usar esta variable
+  const [rs, setRs] = useState([]);
 
   const CACHE_EXPIRATION_TIME = 3600000;
 
@@ -20,7 +20,7 @@ export default function MainCardNews({ language }) {
 
       if (cachedData && Date.now() - cachedData.timestamp < CACHE_EXPIRATION_TIME) {
         setSources(cachedData.data);
-        setRs(cachedData.data);  // Aquí estamos configurando rs con los datos de caché
+        setRs(cachedData.data);  
         setLoading(false);
         return;
       }
@@ -30,26 +30,29 @@ export default function MainCardNews({ language }) {
 
       const combinedData = allSources.map((source) => {
         const matchingArticle = allArticles.find((article) => article.url === source.url);
-
-        // Si se encuentra un artículo correspondiente, agregar la imagen
+        
         if (matchingArticle) {
           return {
             ...source,
             image: matchingArticle.urlToImage || null,
           };
         } else {
-          // Si no hay artículo, devolver el source tal cual, pero sin imagen
           return {
             ...source,
-            image: null, // Asigna null si no hay imagen
+            image: null, 
           };
         }
       });
 
-      setRs(combinedData);  // Aquí es donde actualizas `rs` con los datos combinados
+      setSources(combinedData);  
+
+      const filteredData = combinedData.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        item.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setRs(filteredData);
 
       if (allSources && allSources.length > 0) {
-        setSources(allSources);
         localStorage.setItem(
           cacheKey,
           JSON.stringify({ data: allSources, timestamp: Date.now() })
@@ -67,7 +70,7 @@ export default function MainCardNews({ language }) {
 
   useEffect(() => {
     fetchSources();
-  }, [language]);
+  }, [language, searchQuery]); 
 
   return (
     <div className="m-4">
@@ -77,12 +80,12 @@ export default function MainCardNews({ language }) {
           <div className="flex justify-center items-center h-64">
             <Spinner size="lg" />
           </div>
-        ) : rs.length > 0 ? (  // Aquí estamos usando `rs` en lugar de `sources`
+        ) : rs.length > 0 ? ( 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {rs.map((source) => (  // Aquí también se usa `rs`
+            {rs.map((source) => (  
               <div key={source.id} className="flex justify-center items-center flex-wrap m-4">
                 <CardNews
-                  image={source.image}  // Ahora pasas la imagen correcta
+                  image={source.image} 
                   name={source.name}
                   des={source.description}
                   url={source.url}

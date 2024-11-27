@@ -18,7 +18,7 @@ export async function apiCar(page = 1, pageSize = 10, params = {}) {
       page, 
       pageSize,
       q: params.q || "general",
-      language: params.language || 'es'
+      language: params.language || 'en'
     }).toString();
 
     const response = await fetch(`${baseUrl}?${queryParams}`);

@@ -8,21 +8,21 @@ import { apiKey } from '../apiKey/apiKey';
  *   - language: Idioma de las fuentes (default: 'en').
  * @returns {Array} Lista de fuentes obtenidas desde la API.
  */
-export async function apiCont( params = {}) {
+export async function apiCont(params = {}) {
   try {
     const baseUrl = `https://newsapi.org/v2/top-headlines/sources`;
 
     const queryParams = new URLSearchParams({
       ...params,
       apiKey,
-      country: params.country || 'us',
-      category: params.category || 'general',
-      language: params.language || 'en',
+      country: params.country || 'us',  
+      category: params.category || 'general', 
+      language: params.language || 'en',  
     }).toString();
 
     const response = await fetch(`${baseUrl}?${queryParams}`);
     const data = await response.json();
-    console.log('datos en apiCont: ', data)
+
     if (data.status === 'ok' && data.sources) {
       return data.sources;
     } else {

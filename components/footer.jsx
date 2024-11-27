@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
                         <a href="#" className="hover:underline me-4 md:me-6">About</a>
                     </li>
                     <li>
-                        <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+                        <Link href={'/terms'} className="hover:underline me-4 md:me-6">Privacy Policy</Link>
                     </li>
                     <li>
                         <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>

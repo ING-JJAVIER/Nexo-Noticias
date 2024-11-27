@@ -24,9 +24,9 @@ export default function SelectLanguage({ onChange }) {
     };
 
     const handleSelect = (language) => {
-        setLanguage(language.label);
+        setLanguage(language.label); 
         setIsOpen(false);
-        if (onChange) onChange(language.key);
+        if (onChange) onChange(language.key); 
     };
 
     const handleClickOutside = (event) => {
@@ -53,42 +53,40 @@ export default function SelectLanguage({ onChange }) {
                         value={language}
                         readOnly
                     />
-
                     <button
                         onClick={toggleMenu}
-                        className="flex justify-center items-center outline-none font-medium text-sm "
-                        type="button">
-
+                        className="flex justify-center items-center outline-none font-medium text-sm"
+                        type="button"
+                    >
                         <figure className="flex items-center mx-2">
                             <Image
                                 className='w-4'
                                 src='/icons/1.svg'
                                 alt='language icon'
                                 width={20}
-                                height={20} />
+                                height={20}
+                            />
                         </figure>
                     </button>
                 </label>
             </div>
 
-            {
-                isOpen && (
-                    <div ref={menuRef} className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-8/12 mt-1" aria-required>
-                        <ul className="py-2 text-sm text-gray-700">
-                            {languages.map(language => (
-                                <li key={language.key}>
-                                    <button
-                                        onClick={() => handleSelect(language)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                    >
-                                        {language.label}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )
-            }
+            {isOpen && (
+                <div ref={menuRef} className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-8/12 mt-1" aria-required>
+                    <ul className="py-2 text-sm text-gray-700">
+                        {languages.map(language => (
+                            <li key={language.key}>
+                                <button
+                                    onClick={() => handleSelect(language)}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                >
+                                    {language.label}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
