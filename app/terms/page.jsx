@@ -5,7 +5,7 @@ import Header from '@/components/header';
 const PoliticaDePrivacidad = () => {
     return (
         <>
-        <Header/>
+        <Header hideSearch={true}/>
         <div className="p-6 max-w-2xl mx-auto bg-slate-100">
             <h1 className="text-3xl font-bold mb-4">POLÍTICA DE PRIVACIDAD</h1>
             <p className="text-sm mb-4"><strong>Fecha de entrada en vigor:</strong> 20 de junio de 2023</p>
