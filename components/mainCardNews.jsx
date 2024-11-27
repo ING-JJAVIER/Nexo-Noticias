@@ -4,7 +4,7 @@ import { apiCont } from '@/app/api/apiCont';
 import { apiCar } from '@/app/api/apiCar';
 import { Spinner } from '@nextui-org/react';
 
-export default function MainCardNews({ language, searchQuery }) {
+export default function MainCardNews({ searchQuery, language, category, country }) {
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rs, setRs] = useState([]);
@@ -25,7 +25,7 @@ export default function MainCardNews({ language, searchQuery }) {
         return;
       }
 
-      const allSources = await apiCont(1, 10, { language });
+      const allSources = await apiCont(1, 10, { language, category, country });
       const allArticles = await apiCar(1, 10, { language });
 
       const combinedData = allSources.map((source) => {
@@ -46,10 +46,16 @@ export default function MainCardNews({ language, searchQuery }) {
 
       setSources(combinedData);  
 
-      const filteredData = combinedData.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        item.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      const filteredData = combinedData.filter((item) => {
+        return (
+          (searchQuery ? item.name.toLowerCase().includes(searchQuery.toLowerCase()) : true) ||
+          (searchQuery ? item.description.toLowerCase().includes(searchQuery.toLowerCase()) : true) ||
+          (category ? item.category === category : true) ||
+          (country ? item.country === country : true) ||
+          (language ? item.language === language : true)
+        );
+      });
+
       setRs(filteredData);
 
       if (allSources && allSources.length > 0) {
@@ -70,7 +76,7 @@ export default function MainCardNews({ language, searchQuery }) {
 
   useEffect(() => {
     fetchSources();
-  }, [language, searchQuery]); 
+  }, [searchQuery, language, category, country]);
 
   return (
     <div className="m-4">
@@ -95,7 +101,7 @@ export default function MainCardNews({ language, searchQuery }) {
           </div>
         ) : (
           <div className="text-center mt-4 text-gray-600">
-            <p>No se encontraron fuentes para este país/categoria.</p>
+            <p>No se encontraron fuentes para los filtros seleccionados.</p>
           </div>
         )
       }

@@ -14,7 +14,7 @@ export default function SearchButton({ closeModal, language }) {
     try {
       setLoading(true); 
       const news = await apiCont(1, 10, { language });
-     
+      console.log(news);
     } catch (error) {
       console.error("Error al buscar noticias:", error);
     } finally {

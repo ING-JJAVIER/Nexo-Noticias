@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectCountry from '@/components/selectCountry';
 import SelectLanguage from '@/components/selectLanguage';
 import SelectCategories from '@/components/selectCategories';
 import SearchButton from '@/components/searchButton';
 import Image from 'next/image';
 
-export default function ModalSearch({ closeModal, onSearch }) {
+export default function ModalSearch({ closeModal, onSearch, language }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [language, setLanguage] = useState('');
   const [category, setCategory] = useState('');
   const [country, setCountry] = useState('');
+  const [languageSelection, setLanguageSelection] = useState(language || 'en');
+
+  useEffect(() => {
+   
+    setLanguageSelection(language);
+  }, [language]);
 
   const handleSearch = () => {
     const filters = {
       searchQuery,
-      language,
+      language: languageSelection, 
       category,
       country,
     };
-    onSearch(searchQuery); 
-    closeModal(); 
+    onSearch(filters);  
+    closeModal();
   };
 
   return (
@@ -54,13 +59,13 @@ export default function ModalSearch({ closeModal, onSearch }) {
           </label>
 
           <div className='flex flex-wrap justify-center items-center gap-2 pt-3'>
-            <SelectLanguage onChange={(lang) => setLanguage(lang)} />
+            <SelectLanguage selectedLanguage={languageSelection} onChange={(lang) => setLanguageSelection(lang)} />
             <SelectCategories onChange={(cat) => setCategory(cat)} />
             <SelectCountry onChange={(cnt) => setCountry(cnt)} />
           </div>
 
           <div className='flex justify-center w-full pt-4'>
-            <SearchButton onClick={handleSearch} />
+            <SearchButton language={languageSelection} closeModal={closeModal} />
           </div>
         </div>
       </div>
