@@ -12,7 +12,7 @@ export default function CardNews({ name, des, url, image}) {
                     <img 
                         className="rounded-lg" 
                         src={image} 
-                        alt="news image" 
+                        alt="News Image" 
                         width={100} 
                         height={100} 
                         as='image' 

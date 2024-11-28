@@ -9,7 +9,7 @@ export default function MainCardNews({ searchQuery, language, category, country 
   const [loading, setLoading] = useState(true);
   const [rs, setRs] = useState([]);
 
-  const CACHE_EXPIRATION_TIME = 3600000;
+  const CACHE_EXPIRATION_TIME = 10800000;
 
   const fetchSources = async () => {
     try {
@@ -26,15 +26,17 @@ export default function MainCardNews({ searchQuery, language, category, country 
       }
 
       const allSources = await apiCont(1, 10, { language, category, country });
+
       const allArticles = await apiCar(1, 10, { language });
 
       const combinedData = allSources.map((source) => {
+    
         const matchingArticle = allArticles.find((article) => article.url === source.url);
         
         if (matchingArticle) {
           return {
             ...source,
-            image: matchingArticle.urlToImage || null,
+            image: matchingArticle.urlToImage || null, 
           };
         } else {
           return {
@@ -44,8 +46,10 @@ export default function MainCardNews({ searchQuery, language, category, country 
         }
       });
 
+      
       setSources(combinedData);  
 
+      
       const filteredData = combinedData.filter((item) => {
         return (
           (searchQuery ? item.name.toLowerCase().includes(searchQuery.toLowerCase()) : true) ||
@@ -58,6 +62,7 @@ export default function MainCardNews({ searchQuery, language, category, country 
 
       setRs(filteredData);
 
+      
       if (allSources && allSources.length > 0) {
         localStorage.setItem(
           cacheKey,
@@ -91,7 +96,7 @@ export default function MainCardNews({ searchQuery, language, category, country 
             {rs.map((source) => (  
               <div key={source.id} className="flex justify-center items-center flex-wrap m-4">
                 <CardNews
-                  image={source.image} 
+                  image={source.image}
                   name={source.name}
                   des={source.description}
                   url={source.url}
